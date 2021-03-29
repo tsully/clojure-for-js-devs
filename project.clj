@@ -16,4 +16,6 @@
   :main ^:skip-aot clojure-for-js-devs.core
   :target-path "target/%s"
   :profiles {:uberjar {:aot :all
-                       :jvm-opts ["-Dclojure.compiler.direct-linking=true"]}})
+                       :jvm-opts ["-Dclojure.compiler.direct-linking=true"]}
+             :dev {:dependencies [[lambdaisland/kaocha "1.0.829"]]}}
+  :aliases {"kaocha" ["run" "-m" "kaocha.runner"]})
