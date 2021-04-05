@@ -2,20 +2,14 @@
   (:require [clojure.test :refer [deftest is testing]]
             [clj-http.client :as client]
             [com.stuartsierra.component :as component]
-            [ring.adapter.jetty :as jetty]))
+            [clojure-for-js-devs.http :as http]))
 
-(defrecord TestServer [host port]
-  component/Lifecycle
-  (start [component]
-    (let [server (jetty/run-jetty host port)]
-      (assoc component :server server)))
-  (stop [component]
-    (when-let [server (:server component)]
-      (.stop server))
-    (dissoc component :server)))
-
-(defn new-test-server [host port]
-  (->TestServer host port))
+(defn simple-response
+  "Extract only the things we care about from the response so that we can assert
+  on the entire map at once, which makes test failures easier to debug in a
+  single pass."
+  [response]
+  (select-keys response [:status :body]))
 
 (def ephemeral-port
   "Bind to an emphemeral post that the OS chooses to prevent bind conflicts
@@ -25,15 +19,12 @@
 (deftest routes
   (let [system (component/start
                 (component/system-map
-                 :http-server (new-test-server "localhost" ephemeral-port)))
+                 :http-server (http/new-server "localhost" ephemeral-port)))
         url (.getURI (:server (:http-server system)))]
     (try
       (testing "GET /hello-world"
         (let [response (client/get (str url "/hello-world"))]
           (is (= {:status 200
-                  :body {:user_analytics_id "2043C178-2C12-42F6-A30C-3168FEE41363"
-                         :role "dev ops"
-                         :use_case "testing"
-                         :eng_size "51"}}
-                 response))))
+                  :body "howdy!"}
+                 (simple-response response)))))
       (finally (component/stop system)))))
