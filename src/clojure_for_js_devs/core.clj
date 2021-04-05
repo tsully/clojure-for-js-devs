@@ -9,8 +9,6 @@
 
 (defn main-system []
   (component/system-map
-   ; TODO move redis URI, http port, and IP address to config.edn file
-   ; TODO create function to get set and get config vars
    :redis (redis/new-redis "redis://redis:6379")
    :http-server (component/using
                  (http/new-server "0.0.0.0" 8105)

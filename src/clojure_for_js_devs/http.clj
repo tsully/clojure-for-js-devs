@@ -19,12 +19,9 @@
   "Start the HTTP server with our routes and middlewares."
   ([host port redis-component]
    (-> (app-routes redis-component)
-       ;; TODO see how circleci.backplane.exceptions.ring works and whether we should create simple version of that handler here
-       ;; TODO - check whether we need all of this middleware
-       ;; (ring-exceptions/wrap-report-exceptions)
        ;; Turn map response bodies into JSON with the correct headers.
        (ring-json/wrap-json-response)
-       ;; Turn JSON into map
+       ;; Turn JSON into collection
        (ring-json/wrap-json-body {:keywords? true})
        ;; Parse query strings and set default response headers.
        (ring-defaults/wrap-defaults ring-defaults/api-defaults)
