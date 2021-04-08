@@ -1,7 +1,7 @@
 (ns clojure-for-js-devs.http
   (:require
    [com.stuartsierra.component :as component]
-   [compojure.core :refer [GET POST routes]]
+   [compojure.core :refer [GET routes]]
    [compojure.route :as route]
    [ring.adapter.jetty :as jetty]
    [ring.middleware.defaults :as ring-defaults]
@@ -12,7 +12,8 @@
   (routes
    (GET "/hello-world" [] (http-handlers/hello-world-handler))
    (GET "/ping" [] (http-handlers/ping-handler redis-component))
-    ;; Override the default fallthrough route.
+   (GET "/counter" req
+     (http-handlers/counter-handler req redis-component))
    (route/not-found "Not found")))
 
 (defn start
