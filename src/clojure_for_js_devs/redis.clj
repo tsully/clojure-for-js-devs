@@ -28,3 +28,9 @@
 
 (defn ping [redis]
   (car/wcar (:connection redis) (car/ping)))
+
+(defn getKey [redis key]
+  (car/wcar (:connection redis) (car/get key)))
+
+(defn incr [redis key]
+  (car/wcar (:connection redis) (car/incr key)))

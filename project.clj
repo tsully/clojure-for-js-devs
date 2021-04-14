@@ -17,5 +17,7 @@
   :target-path "target/%s"
   :profiles {:uberjar {:aot :all
                        :jvm-opts ["-Dclojure.compiler.direct-linking=true"]}
-             :dev {:dependencies [[lambdaisland/kaocha "1.0.829"]]}}
+             :dev {:dependencies [[lambdaisland/kaocha "1.0.829"]
+                                  [circleci/bond "0.5.0"]
+                                  [ring/ring-mock]]}}
   :aliases {"kaocha" ["run" "-m" "kaocha.runner"]})
