@@ -33,7 +33,6 @@
                  (simple-response response)))))
       (testing "GET /counter"
         (let [response (client/get (str url "/counter"))]
-          (is (= {:status 200
-                  :body "howdy!"}
-                 (simple-response response)))))
+          (is (= 200
+                 (:status (simple-response response))))))
       (finally (component/stop system)))))

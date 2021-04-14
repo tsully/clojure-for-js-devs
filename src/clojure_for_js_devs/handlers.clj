@@ -10,7 +10,7 @@
   (redis/ping redis-component))
 
 (defn counter-handler [req redis-component]
-  (let [ip (-> req :remote-addr)
+  (let [ip (:remote-addr req)
         counter (redis/getKey redis-component ip)]
     (redis/incr redis-component ip)
     (str "Counter: " counter)))

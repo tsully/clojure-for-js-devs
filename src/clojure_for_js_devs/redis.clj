@@ -1,6 +1,5 @@
 (ns clojure-for-js-devs.redis
   (:gen-class)
-  (:refer-clojure :exclude [get])
   (:require [com.stuartsierra.component :as component]
             [taoensso.carmine :as car]))
 
