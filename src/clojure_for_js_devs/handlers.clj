@@ -1,11 +1,5 @@
 (ns clojure-for-js-devs.handlers
-  (:require [clojure-for-js-devs.redis :as redis]
-            [clojure.string :as string]))
-
-(defn get-client-ip [req]
-  (if-let [ips (get-in req [:headers "x-forwarded-for"])]
-    (-> ips (string/split #",") first)
-    (:remote-addr req)))
+  (:require [clojure-for-js-devs.redis :as redis]))
 
 (defn hello-world-handler
   []
@@ -16,6 +10,7 @@
   (redis/ping redis-component))
 
 (defn counter-handler [req redis-component]
-  (let [ip (str (get-client-ip req))]
+  (let [ip (-> req :remote-addr)
+        counter (redis/getKey redis-component ip)]
     (redis/incr redis-component ip)
-    (redis/getKey redis-component ip)))
+    (str "Counter: " counter)))

@@ -2,7 +2,8 @@
   (:require [clojure.test :refer [deftest is testing]]
             [clj-http.client :as client]
             [com.stuartsierra.component :as component]
-            [clojure-for-js-devs.http :as http]))
+            [clojure-for-js-devs.http :as http]
+            [clojure-for-js-devs.redis :as redis]))
 
 (defn simple-response
   "Extract only the things we care about from the response so that we can assert
@@ -19,11 +20,19 @@
 (deftest routes
   (let [system (component/start
                 (component/system-map
-                 :http-server (http/new-server "localhost" ephemeral-port)))
+                 :redis (redis/new-redis (str "redis://redis:" ephemeral-port))
+                 :http-server (component/using
+                               (http/new-server "0.0.0.0" ephemeral-port)
+                               {:redis :redis})))
         url (.getURI (:server (:http-server system)))]
     (try
       (testing "GET /hello-world"
         (let [response (client/get (str url "/hello-world"))]
+          (is (= {:status 200
+                  :body "howdy!"}
+                 (simple-response response)))))
+      (testing "GET /counter"
+        (let [response (client/get (str url "/counter"))]
           (is (= {:status 200
                   :body "howdy!"}
                  (simple-response response)))))
