@@ -20,9 +20,9 @@
 (deftest routes
   (let [system (component/start
                 (component/system-map
-                 :redis (redis/new-redis (str "redis://redis:" ephemeral-port))
+                 :redis (redis/new-redis (str "redis://redis:" 6379))
                  :http-server (component/using
-                               (http/new-server "0.0.0.0" 6379)
+                               (http/new-server "0.0.0.0" ephemeral-port)
                                {:redis :redis})))
         url (.getURI (:server (:http-server system)))]
     (try
