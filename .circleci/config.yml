@@ -38,7 +38,6 @@ jobs:
           paths:
             - ~/.m2
           key: v1-dependencies-{{ checksum "project.clj" }}
-      - run: redis-cli ping
       # run tests!
       - run: lein test
 
