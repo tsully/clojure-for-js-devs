@@ -58,6 +58,6 @@ workflows:
   build:
     jobs:
       - setup_redis
-      - build
+      - build:
         requires:
           - setup_redis
