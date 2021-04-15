@@ -52,5 +52,5 @@ workflows:
                 environment:
                   DOCKERIZE_VERSION: v0.3.0
             - run:
-                name: Wait for db
+                name: Wait for redis
                 command: dockerize -wait tcp://localhost:6379 -timeout 1m

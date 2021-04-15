@@ -20,7 +20,7 @@
 (deftest routes
   (let [system (component/start
                 (component/system-map
-                 :redis (redis/new-redis (str "redis://redis:" 6379))
+                 :redis (redis/new-redis (str "redis://redis:" "6379"))
                  :http-server (component/using
                                (http/new-server "0.0.0.0" ephemeral-port)
                                {:redis :redis})))
