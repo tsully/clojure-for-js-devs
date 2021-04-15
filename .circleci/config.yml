@@ -5,23 +5,11 @@
 version: 2.1
 
 jobs:
-  setup_redis:
-    docker:
-      - image: cimg/base:2020.01
-      - image: circleci/redis:4.0.9
-    steps:
-      - run:
-          name: install dockerize
-          command: wget https://github.com/jwilder/dockerize/releases/download/$DOCKERIZE_VERSION/dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz && sudo tar -C /usr/local/bin -xzvf dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz && rm dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz
-          environment:
-            DOCKERIZE_VERSION: v0.3.0
-      - run:
-          name: Wait for db
-          command: dockerize -wait tcp://localhost:6379 -timeout 1m
   build:
     docker:
       # specify the version you desire here
       - image: circleci/clojure:lein-2.9.5
+      - image: circleci/redis:4.0.9
 
       # Specify service dependencies here if necessary
       # CircleCI maintains a library of pre-built images
@@ -37,7 +25,14 @@ jobs:
 
     steps:
       - checkout
-
+      - run:
+          name: install dockerize
+          command: wget https://github.com/jwilder/dockerize/releases/download/$DOCKERIZE_VERSION/dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz && sudo tar -C /usr/local/bin -xzvf dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz && rm dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz
+          environment:
+            DOCKERIZE_VERSION: v0.3.0
+      - run:
+          name: Wait for db
+          command: dockerize -wait tcp://localhost:6379 -timeout 1m
       # Download and cache dependencies
       - restore_cache:
           keys:
@@ -57,7 +52,4 @@ jobs:
 workflows:
   build:
     jobs:
-      - setup_redis
-      - build:
-          requires:
-            - setup_redis
+      - build
