@@ -22,7 +22,7 @@
                 (component/system-map
                  :redis (redis/new-redis (str "redis://redis:" ephemeral-port))
                  :http-server (component/using
-                               (http/new-server "0.0.0.0" "6379")
+                               (http/new-server "0.0.0.0" 6379)
                                {:redis :redis})))
         url (.getURI (:server (:http-server system)))]
     (try
