@@ -49,7 +49,7 @@ jobs:
           name: Start container and verify it is working
           command: |
             set -x
-            docker-compose -d -f docker-compose-services.yml
+            docker-compose -d
             docker run --network container:contacts \
               appropriate/curl --retry 10 --retry-delay 1 --retry-connrefused http://localhost:8080/contacts/test
 
