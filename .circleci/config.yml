@@ -11,7 +11,7 @@ jobs:
       - image: circleci/clojure:lein-2.9.5
       - image: redis:4.0.2-alpine
       - image: redis:4.0.2-alpine
-        command: redis-server --port 6379
+        command: redis-server --port 16379
 
     working_directory: ~/repo
 

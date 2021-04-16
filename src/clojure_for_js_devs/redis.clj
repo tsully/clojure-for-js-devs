@@ -14,6 +14,7 @@
       this
       (do
         (println "Starting Redis component")
+        (println "Redis connection URI" this)
         (assoc this :connection {:pool {} :spec {:uri uri}}))))
 
   (stop [this]
