@@ -1,5 +1,5 @@
 (ns clojure-for-js-devs.http-test
-  (:require [clojure.test :refer [deftest is testing]]
+  (:require [clojure.test :refer [deftest is testing use-fixtures]]
             [clj-http.client :as client]
             [com.stuartsierra.component :as component]
             [clojure-for-js-devs.http :as http]
@@ -16,6 +16,12 @@
   "Bind to an emphemeral post that the OS chooses to prevent bind conflicts
   between multiple test runs."
   0)
+
+(defn my-test-fixture [f]
+  (redis/new-redis (str "redis://redis:" "6379")
+  (f))
+
+(use-fixtures :once my-test-fixture)
 
 (deftest routes
   (let [system (component/start
