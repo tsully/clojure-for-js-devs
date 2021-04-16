@@ -3,7 +3,8 @@
             [clj-http.client :as client]
             [com.stuartsierra.component :as component]
             [clojure-for-js-devs.http :as http]
-            [clojure-for-js-devs.redis :as redis]))
+            [clojure-for-js-devs.redis :as redis]
+            [clojure-for-js-devs.test-core :as t]))
 
 (defn simple-response
   "Extract only the things we care about from the response so that we can assert
@@ -17,11 +18,7 @@
   between multiple test runs."
   0)
 
-(defn my-test-fixture [f]
-  (redis/new-redis (str "redis://redis:" "6379")
-  (f))
-
-(use-fixtures :once my-test-fixture)
+(use-fixtures :once t/init-system)
 
 (deftest routes
   (let [system (component/start
