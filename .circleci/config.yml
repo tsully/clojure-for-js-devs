@@ -9,7 +9,8 @@ jobs:
     docker:
       # specify the version you desire here
       - image: circleci/clojure:lein-2.9.5
-      - image: redis
+      - image: redis:4.0.2-alpine
+        command: redis-server --port 6379
 
       # Specify service dependencies here if necessary
       # CircleCI maintains a library of pre-built images
