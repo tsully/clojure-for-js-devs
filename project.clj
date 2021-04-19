@@ -2,7 +2,6 @@
   :description "Simple app to demonstrate how to construct Clojure microservices."
   :url "https://github.com/tsully/clojure-for-js-devs"
   :dependencies [[org.clojure/clojure "1.10.1"]
-                 [org.clojure/tools.logging "0.5.0"]
                  [com.stuartsierra/component "0.4.0"]
                  [compojure "1.6.1"]
                  [ring/ring-core "1.8.0"]
@@ -12,7 +11,7 @@
                  [ring/ring-mock "0.4.0"]
                  [circleci/bond "0.5.0"]
                  [clj-http-fake "1.0.3"]
-                 [com.taoensso/carmine "2.20.0"]]
+                 [com.taoensso/carmine "3.1.0"]]
   :main ^:skip-aot clojure-for-js-devs.core
   :target-path "target/%s"
   :profiles {:uberjar {:aot :all
