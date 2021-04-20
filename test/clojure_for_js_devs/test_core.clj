@@ -13,7 +13,7 @@
 (defn- test-system
   []
   (component/system-map
-   :redis (redis/new-redis (str "localhost:" "6379")) ; (str "redis://redis:" "6379")
+   :redis (redis/new-redis "redis://localhost:6379") ; (str "redis://redis:" "6379") ; (str "localhost:" "6379")
    :http-server (component/using
                  (http/new-server "localhost" ephemeral-port)
                  {:redis :redis})))
