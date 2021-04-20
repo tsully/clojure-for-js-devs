@@ -1,9 +1,6 @@
 (ns clojure-for-js-devs.http-test
   (:require [clojure.test :refer [deftest is testing use-fixtures]]
             [clj-http.client :as client]
-            [com.stuartsierra.component :as component]
-            [clojure-for-js-devs.http :as http]
-            [clojure-for-js-devs.redis :as redis]
             [clojure-for-js-devs.test-core :as t]))
 
 (defn simple-response
