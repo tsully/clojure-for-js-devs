@@ -13,29 +13,16 @@
   [response]
   (select-keys response [:status :body]))
 
-(def ephemeral-port
-  "Bind to an emphemeral post that the OS chooses to prevent bind conflicts
-  between multiple test runs."
-  0)
-
 (use-fixtures :once t/init-system)
 
 (deftest routes
-  (let [system (component/start
-                (component/system-map
-                 :redis (redis/new-redis (str "redis://redis:" "6379"))
-                 :http-server (component/using
-                               (http/new-server "0.0.0.0" ephemeral-port)
-                               {:redis :redis})))
-        url (.getURI (:server (:http-server system)))]
-    (try
-      (testing "GET /hello-world"
-        (let [response (client/get (str url "/hello-world"))]
-          (is (= {:status 200
-                  :body "howdy!"}
-                 (simple-response response)))))
-      (testing "GET /counter"
-        (let [response (client/get (str url "/counter"))]
-          (is (= 200
-                 (:status (simple-response response))))))
-      (finally (component/stop system)))))
+  (let [url (.getURI (:server (:http-server t/system)))]
+    (testing "GET /hello-world"
+      (let [response (client/get (str url "hello-world"))]
+        (is (= {:status 200
+                :body "howdy!"}
+               (simple-response response)))))
+    (testing "GET /counter"
+      (let [response (client/get (str url "counter"))]
+        (is (= 200
+               (:status (simple-response response))))))))

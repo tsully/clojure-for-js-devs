@@ -5,12 +5,17 @@
 
 (def system nil)
 
+(def ephemeral-port
+  "Bind to an emphemeral post that the OS chooses to prevent bind conflicts
+  between multiple test runs."
+  0)
+
 (defn- test-system
   []
   (component/system-map
    :redis (redis/new-redis (str "redis://redis:" "6379"))
    :http-server (component/using
-                 (http/new-server "0.0.0.0" 8080)
+                 (http/new-server "localhost" ephemeral-port)
                  {:redis :redis})))
 
 (defn- setup-system
