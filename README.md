@@ -1,4 +1,5 @@
-This project is intended as an educational tool to teach JavaScript developers how to set up their first microservice. clojure-for-js-devs is a simple microservice that counts how many times the user visits the `/counter` route.
+This project is intended as an educational tool to teach JavaScript developers how to set up their first 
+Clojure microservice. `clojure-for-js-devs` is a simple Clojure microservice that counts how many times the user visits the `/counter` route.
 
 ### Run the project
 
