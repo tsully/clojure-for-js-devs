@@ -1,1 +1,2 @@
-{:kaocha/color? true}
+#kaocha/v1
+ {:kaocha/color? true}

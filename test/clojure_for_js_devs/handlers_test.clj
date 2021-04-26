@@ -8,16 +8,13 @@
 (deftest handlers-hello-world
   (testing "hello-world-handler"
     (let [response "howdy!"]
-      (is (= (handlers/hello-world-handler) response))))
+      (is (= (handlers/hello-world-handler) response)))))
+
+(deftest handlers-counter
   (testing "counter-handler"
     (let [response "Counter: 44"
           req (->  (ring-mock/request :get "/counter"))]
       (bond/with-stub! [[redis/getKey (constantly 44)] [redis/incr (constantly nil)]]
         (is (= (handlers/counter-handler req {}) response))))))
-
-(deftest handlers-counter
-  (testing "hello-world-handler"
-    (let [response "howdy!"]
-      (is (= (handlers/hello-world-handler) response)))))
 
 

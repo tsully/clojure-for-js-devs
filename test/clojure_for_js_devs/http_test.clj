@@ -10,9 +10,11 @@
   [response]
   (select-keys response [:status :body]))
 
+; Create the system map, run all of the tests in this namespace,
+; and then tear down the system map.
 (use-fixtures :once t/init-system)
 
-(deftest routes
+(deftest integration-tests
   (let [url (.getURI (:server (:http-server t/system)))]
     (testing "GET /hello-world"
       (let [response (client/get (str url "hello-world"))]
