@@ -12,7 +12,7 @@
 
 (use-fixtures :once t/init-system)
 
-(deftest routes
+(deftest integration-tests
   (let [url (.getURI (:server (:http-server t/system)))]
     (testing "GET /hello-world"
       (let [response (client/get (str url "hello-world"))]
