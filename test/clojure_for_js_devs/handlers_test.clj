@@ -9,6 +9,7 @@
   (testing "hello-world-handler"
     (let [response "howdy!"]
       (is (= (handlers/hello-world-handler) response))))
+  
   (testing "counter-handler"
     (let [response "Counter: 44"
           req (->  (ring-mock/request :get "/counter"))]
