@@ -35,3 +35,23 @@ You can run individual tests by specifying the namespace and testing function. F
 ```sh
 lein test --focus clojure-for-js-devs.handlers-test/handlers-hello-world
 ```
+
+### Build the app
+
+Compile your project into a JAR file:
+
+```sh
+lein uberjar
+```
+
+Next, make sure that your Redis server is running:
+
+```sh
+docker-compose -f docker-compose-services.yml up
+```
+
+Finally, run the JAR file:
+
+```sh
+java -jar target/uberjar/clojure-for-js-devs-0.1.0-SNAPSHOT-standalone.jar
+```
