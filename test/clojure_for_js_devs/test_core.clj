@@ -11,6 +11,7 @@
   0)
 
 (defn- test-system
+  "Create system map to be used in integration tests."
   []
   (component/system-map
    :redis (redis/new-redis "redis://localhost:6379")
@@ -19,14 +20,17 @@
                  {:redis :redis})))
 
 (defn- setup-system
+  "Rebind system variable to the system map."
   []
   (alter-var-root #'system (fn [_] (component/start (test-system)))))
 
 (defn- tear-down-system
+  "Stop each component in the system map and bind result to the system variable."
   []
   (alter-var-root #'system (fn [s] (when s (component/stop s)))))
 
 (defn init-system
+  "Create the test component system map, run the tests, and then tear down the system map."
   [test-fn]
   (setup-system)
   (test-fn)

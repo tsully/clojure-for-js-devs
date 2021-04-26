@@ -10,6 +10,8 @@
   [response]
   (select-keys response [:status :body]))
 
+; Create the system map, run all of the tests in this namespace,
+; and then tear down the system map.
 (use-fixtures :once t/init-system)
 
 (deftest integration-tests
