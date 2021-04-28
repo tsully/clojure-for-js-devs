@@ -28,7 +28,7 @@ docker-compose -f docker-compose-services.yml up
 In a separate terminal, run the tests:
 
 ```sh
-lein run
+lein test
 ```
 
 You can run individual tests by specifying the namespace and testing function. For example:
