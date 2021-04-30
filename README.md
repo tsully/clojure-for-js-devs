@@ -5,7 +5,7 @@ Clojure microservice.
 
 ### Run the REPL
 
-The REPL will be workhorse of your development workflow. Clojure’s REPL allows you an interactive and flexible development experience that ultimately tightens your iteration/feedback cycles.
+The REPL will be the workhorse of your development workflow. Clojure’s REPL allows you an interactive and flexible development experience that ultimately tightens your iteration/feedback cycles.
 
 Before you start the REPL, run docker-compose to set up the Redis server.
 
