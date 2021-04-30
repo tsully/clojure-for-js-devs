@@ -6,6 +6,10 @@
    [clojure-for-js-devs.http :as http]
    [clojure-for-js-devs.redis :as redis]))
 
+; Create a variable called *system* that can only be defined once
+; ^:dynamic means that this variable can be rebound to a new value
+(defonce ^:dynamic *system* nil)
+
 (defn main-system
   "Creates map of component dependencies with implementation of Lifecycle protocol"
   []
@@ -26,11 +30,9 @@
 (defn stop
   "Stop components of system in dependency order. Runs SystemMap implementation of Lifecycle protocol's 'stop' function"
   [system]
-  (component/stop system))
-
-; Create a variable called *system* that can only be defined once
-; ^:dynamic means that this variable can be rebound to a new value
-(defonce ^:dynamic *system* nil)
+  (component/stop system)
+  ; dynamically rebind *system* var back to nil
+  (alter-var-root #'*system* (constantly nil)))
 
 (defn -main
   "Entry point to the application."
