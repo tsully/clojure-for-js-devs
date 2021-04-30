@@ -84,7 +84,7 @@ lein run
 
 ### Build the app for a production environment
 
-When you deploy your application to production, you'll compile it to a standalone JAR file. To understand how this works, you can compile your project into a JAR file and run it locally.
+When you deploy your application to production, you'll compile it to a standalone JAR file. Typically, this will be handled by your CI, but to understand how this works, you can compile your project into a JAR file and run it locally.
 
 ```sh
 lein uberjar
