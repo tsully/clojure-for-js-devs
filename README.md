@@ -5,7 +5,7 @@ Clojure microservice.
 
 ### Run the REPL
 
-The REPL will be workhorse of your development workflow. Clojure’s REPL allows you an interactive and flexible development experience that ultimately tightens your iteration/feedback cycles.
+The REPL will be the workhorse of your development workflow. Clojure’s REPL allows you an interactive and flexible development experience that ultimately tightens your iteration/feedback cycles.
 
 Before you start the REPL, run docker-compose to set up the Redis server.
 
@@ -84,7 +84,7 @@ lein run
 
 ### Build the app for a production environment
 
-When you deploy your application to production, you'll compile it to a standalone JAR file. To understand how this works, you can compile your project into a JAR file and run it locally.
+When you deploy your application to production, you'll compile it to a standalone JAR file. Typically, this will be handled by your CI, but to understand how this works, you can compile your project into a JAR file and run it locally.
 
 ```sh
 lein uberjar
