@@ -1,5 +1,8 @@
-This project is intended as an educational tool to teach JavaScript developers how to set up their first
-Clojure microservice.
+This project is intended as a resource for the "Clojure Microservices for JavaScript Developers" blog series:
+
+1. [Thinking in Clojure vs Thinking JavaScript](https://circleci.com/blog/clojure-microservices-for-js-devs-pt-1/)
+2. [Creating Your First Clojure Microservice](https://circleci.com/blog/clojure-microservices-for-js-devs-pt-2/)
+3. [Testing and CI](https://circleci.com/blog/clojure-microservices-for-js-devs-pt-3/)
 
 `clojure-for-js-devs` is a simple Clojure microservice that counts how many times the user visits the `/counter` route.
 
